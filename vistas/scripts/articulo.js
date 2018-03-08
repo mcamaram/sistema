@@ -216,9 +216,12 @@ function activar(idarticulo)
 	});
 }
 
+
+
 //función para generar el código de barras
 function generarbarcode()
 {
+	codigo=$("#codigo").val( Math.floor( 1000000000000 + Math.random() * 9000000000000 ) );
 	codigo=$("#codigo").val();
 	JsBarcode("#barcode", codigo);
 	$("#print").show();
