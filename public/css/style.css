@@ -10,10 +10,45 @@
 {
     font-family: 'Roboto Condensed', sans-serif;
 }
+#row {
+    margin-top: 10%;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.panel-body
+{
+    padding: 15px;
+}
+
+#frmAcceso 
+{
+    margin: auto;
+}
 
 img
 {
     width: 100%;
+}
+.panel-heading 
+{
+  padding: 5px 15px;
+}
+
+.panel-footer {
+  padding: 1px 15px;
+  color: #A0A0A0;
+}
+
+.profile-img 
+{
+  width: 240px;
+  height: 117px;
+  margin: 0 auto 10px;
+  display: block;
+  /*-moz-border-radius: 50%;*/
+  /*-webkit-border-radius: 50%;*/
+  /*border-radius: 50%;*/
 }
 
 .title

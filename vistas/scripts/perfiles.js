@@ -1,22 +1,21 @@
 var tabla;
-
 //Función que se ejecuta al inicio
 function init(){
 	mostrarform(false);
 	listar();
-$('.pasar').click(function() { 
-return !$('#origen option:selected').remove().appendTo('#destino'); 
+$('.pasar').click(function() {
+return !$('#origen option:selected').remove().appendTo('#destino');
 });
 $('.quitar').click(function() {
- return !$('#destino option:selected').remove().appendTo('#origen'); 
+ return !$('#destino option:selected').remove().appendTo('#origen');
 });
 $('.pasartodos').click(function() {
- $('#origen option').each(function() { $(this).remove().appendTo('#destino'); 
-  }); 
+ $('#origen option').each(function() { $(this).remove().appendTo('#destino');
+  });
 });
-$('.quitartodos').click(function() { 
-$('#destino option').each(function() { $(this).remove().appendTo('#origen'); 
-  }); 
+$('.quitartodos').click(function() {
+$('#destino option').each(function() { $(this).remove().appendTo('#origen');
+  });
 });
 //$('.submit').click(function() { $('#destino option').prop('selected', 'selected'); });
 //Mostramos los permisos
@@ -26,7 +25,7 @@ $('#destino option').each(function() { $(this).remove().appendTo('#origen');
 
 	$("#formulario").on("submit",function(e)
 	{
-		guardaryeditar(e);	
+		guardaryeditar(e);
 	})
 }
 
@@ -97,8 +96,8 @@ function listar()
     "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "Todos"]],
      buttons: [
       { extend: 'colvis', text: '<i class="fa fa-eye" aria-hidden="true"></i>' },
-      { extend: 'copy', text: '<i class="fa fa-clipboard" aria-hidden="true"></i>' }, 
-      { extend: 'excel', text: '<i class="fa fa-file-excel-o text-success" aria-hidden="true"></i>',title: 'Mi Inventario' }, 
+      { extend: 'copy', text: '<i class="fa fa-clipboard" aria-hidden="true"></i>' },
+      { extend: 'excel', text: '<i class="fa fa-file-excel-o text-success" aria-hidden="true"></i>',title: 'Mi Inventario' },
       { extend: 'pdf', text: '<i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>',title: 'Mi Inventario' },
       { extend: 'print', text: '<i class="fa fa-print" aria-hidden="true"></i>' }
 
@@ -107,9 +106,9 @@ function listar()
 				{
 					url: '../ajax/perfiles.php?op=listar',
 					type : "get",
-					dataType : "json",						
+					dataType : "json",
 					error: function(e){
-						console.log(e.responseText);	
+						console.log(e.responseText);
 					}
 				},
 		columnDefs:[
@@ -142,8 +141,8 @@ function guardaryeditar(e)
 	    processData: false,
 
 	    success: function(datos)
-	    {                    
-	          bootbox.alert(datos);	          
+	    {
+	          bootbox.alert(datos);
 	          mostrarform(false);
 	          tabla.ajax.reload();
 	    }
@@ -156,7 +155,7 @@ function mostrar(idcategoria)
 {
 	$.post("../ajax/categoria.php?op=mostrar",{idcategoria : idcategoria}, function(data, status)
 	{
-		data = JSON.parse(data);		
+		data = JSON.parse(data);
 		mostrarform(true);
 
 		$("#nombre").val(data.nombre);
@@ -175,7 +174,7 @@ function desactivar(idcategoria)
         	$.post("../ajax/categoria.php?op=desactivar", {idcategoria : idcategoria}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
-        	});	
+        	});
         }
 	})
 }
@@ -189,7 +188,7 @@ function activar(idcategoria)
         	$.post("../ajax/categoria.php?op=activar", {idcategoria : idcategoria}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
-        	});	
+        	});
         }
 	})
 }
