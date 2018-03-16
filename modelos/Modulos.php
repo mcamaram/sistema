@@ -1,4 +1,4 @@
-<?php 
+<?php
 //Incluímos inicialmente la conexión a la base de datos
 require "../config/Conexion.php";
 
@@ -7,7 +7,7 @@ Class Modulos
 	//Implementamos nuestro constructor
 	public function __construct()
 	{
-     
+
 	}
 
 	//Implementamos un método para insertar registros
@@ -48,14 +48,14 @@ Class Modulos
 	//Implementar un método para listar los registros
 	public function listar()
 	{
-		$sql="CALL sp_list_all_module()";
+		$sql="select * from modulos";
 		return ejecutarConsulta($sql);		
 	}
 	//Implementar un método para listar los registros y mostrar en el select
 	public function select()
 	{
 		$sql="CALL sp_list_modules_activated()";
-		return ejecutarConsulta($sql);		
+		return ejecutarConsulta($sql);
 	}
 }
 

@@ -1,9 +1,9 @@
-<?php 
+<?php
 require_once "../modelos/Modulos.php";
 require_once "../modelos/Permiso.php";
 
 $modulo = new Modulos();
-$permiso = new Permiso();
+
 
 $idcampus=isset($_POST["idcampus"])? limpiarCadena($_POST["idcampus"]):"";
 $nombre=isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
@@ -40,25 +40,20 @@ switch ($_GET["op"]){
 	break;
 
 	case 'listar_permisos_x_modulo':
+	$permiso = new Permiso();
 		$modulos=$modulo->listar();
-		
-		///----------------------------
-        if(mysql_num_rows(modulos) > 0)
-        {
-           
-            ///recorrer el array de modulos
+		$permiso =$permiso->listar();
+        ///recorrer el array de modulos
  		    while ($reg=$modulos->fetch_object())
  		    {
- 			  echo '<li id="'.$reg->idmodulo.'" data-checkstate="unchecked">'.$reg->modulo.'</li>';
- 			  $permisos=$permiso->listar_permisos_x_modulo($reg->idmodulo);
- 			  while ($reg1 = $permisos->fetch_object())
- 			  {
+ 			    echo '<li id="'.$reg->idmodulo.'" data-checkstate="unchecked">'.$reg->modulo.'</li>';
+ 			    while ($reg1 = $permisos->fetch_object())
+ 			    {
  			  	echo '<ul><li id="'.$reg1->idpermiso.'" data-checkstate="unchecked">'.$reg->nombre.'</li></ul>';
- 			  }
- 		    }
- 		    
- 	    }
-        
+ 			    }
+			  }
+
+
 
 	break;
 
