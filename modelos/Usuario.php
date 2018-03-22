@@ -1,4 +1,4 @@
-<?php 
+<?php
 //Incluímos inicialmente la conexión a la base de datos
 require "../config/Conexion.php";
 
@@ -79,9 +79,17 @@ Class Usuario
 	//Implementar un método para listar los registros
 	public function listar()
 	{
-		$sql="SELECT * FROM usuario";
-		return ejecutarConsulta($sql);		
+		$sql="CALL sp_get_all_users()";
+		return ejecutarConsulta($sql);
 	}
+
+		//Implementar un método para listar los registros
+		public function select()
+		{
+			$sql="CALL sp_get_all_users_activated()";
+			return ejecutarConsulta($sql);
+		}
+
 	//Implementar un método para listar los permisos marcados
 	public function listarmarcados($idusuario)
 	{
@@ -92,8 +100,8 @@ Class Usuario
 	//Función para verificar el acceso al sistema
 	public function verificar($login,$clave)
     {
-    	$sql="SELECT idusuario,nombre,tipo_documento,num_documento,telefono,email,cargo,imagen,login FROM usuario WHERE login='$login' AND clave='$clave' AND condicion='1'"; 
-    	return ejecutarConsulta($sql);  
+    	$sql="SELECT idusuario,nombre,tipo_documento,num_documento,telefono,email,cargo,imagen,login FROM usuario WHERE login='$login' AND clave='$clave' AND condicion='1'";
+    	return ejecutarConsulta($sql);
     }
 }
 

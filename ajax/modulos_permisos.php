@@ -40,20 +40,18 @@ switch ($_GET["op"]){
 	break;
 
 	case 'listar_permisos_x_modulo':
-	$permiso = new Permiso();
-		$modulos=$modulo->listar();
-		$permiso =$permiso->listar();
-        ///recorrer el array de modulos
+	$modulos=$modulo->listar();
+		///recorrer el array de modulos
  		    while ($reg=$modulos->fetch_object())
  		    {
- 			    echo '<li id="'.$reg->idmodulo.'" data-checkstate="unchecked">'.$reg->modulo.'</li>';
- 			    while ($reg1 = $permisos->fetch_object())
+          $permiso = new Permiso();
+					$permiso = $permiso->listar();
+					echo '<li class="parent"> <input type="checkbox"   name="modulos[]" value="'.$reg->idmodulo.'">'.$reg->modulo.'</li>';
+ 			    while ($reg1 = $permiso->fetch_object())
  			    {
- 			  	echo '<ul><li id="'.$reg1->idpermiso.'" data-checkstate="unchecked">'.$reg->nombre.'</li></ul>';
+						echo '<ul><li> <input type="checkbox"   name="permisos[]" value="'.$reg1->idpermiso.'">'.$reg1->nombre.'</li></ul>';
  			    }
 			  }
-
-
 
 	break;
 

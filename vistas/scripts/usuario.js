@@ -7,14 +7,25 @@ function init(){
 
 	$("#formulario").on("submit",function(e)
 	{
-		guardaryeditar(e);	
+		guardaryeditar(e);
 	})
+	$('.parent >ul').each(function(){ $(this).hide();});
 
+					 $('.parent >label').click(function(){
+
+							$(this).parent().find('ul').each(function(){
+								 $(this).toggle();
+
+							});
+					 });
+	//Cargamos los items al select categoria
+ 	$.post("../ajax/usuario.php?op=selectRol", function(r){
+ 	            $("#idrol").html(r);
+ 	            $('#idrol').selectpicker('refresh');
+
+ 	});
 	$("#imagenmuestra").hide();
-	//Mostramos los permisos
-	$.post("../ajax/modulos_permisos.php?op=listar_permisos_x_modulo",function(r){
-	        $("#permisos").html(r);
-	});
+
 }
 
 //Función limpiar
@@ -43,6 +54,18 @@ function mostrarform(flag)
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled",false);
 		$("#btnagregar").hide();
+		$.post("../ajax/modulos_permisos.php?op=listar_permisos_x_modulo",function(r){
+					$("#permisos").html(r);
+	});
+	$('.parent >ul').each(function(){ $(this).hide();});
+
+					 $('.parent >label').click(function(){
+
+							$(this).parent().find('ul').each(function(){
+								 $(this).toggle();
+
+							});
+					 });
 	}
 	else
 	{
@@ -50,6 +73,7 @@ function mostrarform(flag)
 		$("#formularioregistros").hide();
 		$("#btnagregar").show();
 	}
+
 }
 
 //Función cancelarform
@@ -62,7 +86,7 @@ function cancelarform()
 //Función Listar
 function listar()
 {
-	var tabla=$('#tbllistado').dataTable(
+	 tabla=$('#tbllistado').DataTable(
 	{
 	  dom: 'lBfrtip',//Definimos los elementos del control de tabla
 	  language: {
@@ -91,8 +115,8 @@ function listar()
     "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "Todos"]],
      buttons: [
       { extend: 'colvis', text: '<i class="fa fa-eye" aria-hidden="true"></i>' },
-      { extend: 'copy', text: '<i class="fa fa-clipboard" aria-hidden="true"></i>' }, 
-      { extend: 'excel', text: '<i class="fa fa-file-excel-o text-success" aria-hidden="true"></i>',title: 'Mi Inventario' }, 
+      { extend: 'copy', text: '<i class="fa fa-clipboard" aria-hidden="true"></i>' },
+      { extend: 'excel', text: '<i class="fa fa-file-excel-o text-success" aria-hidden="true"></i>',title: 'Mi Inventario' },
       { extend: 'pdf', text: '<i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>',title: 'Mi Inventario' },
       { extend: 'print', text: '<i class="fa fa-print" aria-hidden="true"></i>' }
 
@@ -101,17 +125,17 @@ function listar()
 				{
 					url: '../ajax/usuario.php?op=listar',
 					type : "get",
-					dataType : "json",						
+					dataType : "json",
 					error: function(e){
-						console.log(e.responseText);	
+						console.log(e.responseText);
 					}
 				},
 		columnDefs:[
-      { 
-      	orderable: false, targets: [0] 
+      {
+      	orderable: false, targets: [0]
       },
-      { 
-      	orderable: false, targets: [2] 
+      {
+      	orderable: false, targets: [2]
       }
     ],
     order:[
@@ -122,7 +146,7 @@ function listar()
 	//"bDestroy": true,
     //"iDisplayLength": 5,//Paginación
 	//"order": [[ 0, "desc" ]]//Ordenar (columna,orden)
-	});
+});
 	tabla.buttons().container().appendTo( $('.col-sm-6:eq(0)', tabla.table().container() ) );
 }
 //Función para guardar o editar
@@ -141,8 +165,8 @@ function guardaryeditar(e)
 	    processData: false,
 
 	    success: function(datos)
-	    {                    
-	          bootbox.alert(datos);	          
+	    {
+	          bootbox.alert(datos);
 	          mostrarform(false);
 	          tabla.ajax.reload();
 	    }
@@ -155,7 +179,7 @@ function mostrar(idusuario)
 {
 	$.post("../ajax/usuario.php?op=mostrar",{idusuario : idusuario}, function(data, status)
 	{
-		data = JSON.parse(data);		
+		data = JSON.parse(data);
 		mostrarform(true);
 
 		$("#nombre").val(data.nombre);
@@ -177,9 +201,7 @@ function mostrar(idusuario)
  	//$.post("../ajax/usuario.php?op=permisos&id="+idusuario,function(r){
 	        //$("#permisos").html(r);
 	//});
-		$.post("../ajax/modulos_permisos.php?op=listar_permisos_x_modulo",function(r){
-	        $("#permisos").html(r);
-	});
+
 }
 
 //Función para desactivar registros
@@ -191,7 +213,7 @@ function desactivar(idusuario)
         	$.post("../ajax/usuario.php?op=desactivar", {idusuario : idusuario}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
-        	});	
+        	});
         }
 	})
 }
@@ -205,7 +227,7 @@ function activar(idusuario)
         	$.post("../ajax/usuario.php?op=activar", {idusuario : idusuario}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
-        	});	
+        	});
         }
 	})
 }

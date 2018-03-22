@@ -15,7 +15,7 @@ if ($_SESSION['acceso']==1)
 ?>
 <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">        
+      <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -42,10 +42,10 @@ if ($_SESSION['acceso']==1)
                             <th class="bg-primary">Foto</th>
                             <th class="bg-primary">Estado</th>
                           </thead>
-                          <tbody>                            
+                          <tbody>
                           </tbody>
                           <tfoot>
-                            
+
                           </tfoot>
                         </table>
                     </div>
@@ -92,21 +92,25 @@ if ($_SESSION['acceso']==1)
                             <label>Clave (*):</label>
                             <input type="password" class="form-control" name="clave" id="clave" maxlength="64" placeholder="Clave" required>
                           </div>
-                          
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>Seleccione el rol(*):</label>
+                            <select id="idrol" name="idrol" class="form-control selectpicker" data-live-search="true" required>
+                            </select>
+                          </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12" id="container">
                             <label>Permisos:</label>
-                            <ul style="list-style: none;" id="permisos">
-                              
+                            <ul style="list-style:none;" id="permisos">
+
                             </ul>
                           </div>
-                        
-                
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+
+                        <!--  <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Imagen:</label>
                             <input type="file" class="form-control" name="imagen" id="imagen">
                             <input type="hidden" name="imagenactual" id="imagenactual">
                             <img src="" width="150px" height="120px" id="imagenmuestra">
-                          </div>
+                          </div>-->
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
 
@@ -132,8 +136,8 @@ require 'footer.php';
 ?>
 
 <script type="text/javascript" src="scripts/usuario.js"></script>
-<script type="text/javascript" src="scripts/modulos_permisos_tree.js"></script> 
-<?php 
+<!--<script type="text/javascript" src="scripts/modulos_permisos_tree.js"></script> -->
+<?php
 }
 ob_end_flush();
 ?>

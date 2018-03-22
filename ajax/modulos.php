@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "../modelos/Modulos.php";
 
 $modulos = new Modulos();
@@ -70,10 +70,11 @@ switch ($_GET["op"]){
 
  		while ($reg=$rspta->fetch_object())
  		{
- 			echo '<option value='.$reg->idmodulo.'>'.$reg->modulo.'</option>';
- 			
+ 			//echo '<option value='.$reg->idmodulo.'>'.$reg->modulo.'</option>';
+			echo '<li id="'.$reg->idmodulo.'" data-checkstate="unchecked">'.$reg->modulo.'</li>';
+
  		}
- 		
+
 
 	break;
 }

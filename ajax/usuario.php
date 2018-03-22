@@ -1,5 +1,5 @@
 <?php
-session_start(); 
+session_start();
 require_once "../modelos/Usuario.php";
 
 $usuario=new Usuario();
@@ -23,7 +23,7 @@ switch ($_GET["op"]){
 		{
 			$imagen=$_POST["imagenactual"];
 		}
-		else 
+		else
 		{
 			$ext = explode(".", $_FILES["imagen"]["name"]);
 			if ($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png")
@@ -77,10 +77,10 @@ switch ($_GET["op"]){
  				"3"=>$reg->num_documento,
  				"4"=>$reg->telefono,
  				"5"=>$reg->email,
- 				"6"=>$reg->cargo,
  				"6"=>$reg->login,
- 				"7"=>"<img src='../files/usuarios/".$reg->imagen."' height='50px' width='50px' >",
- 				"8"=>($reg->condicion)?'<span class="label bg-green">Activado</span>':
+				"7"=>$reg->perfil,
+ 				"8"=>"<img src='../files/usuarios/".$reg->imagen."' height='50px' width='50px' >",
+ 				"9"=>($reg->condicion)?'<span class="label bg-green">Activado</span>':
  				'<span class="label bg-red">Desactivado</span>'
  				);
  		}
@@ -166,8 +166,22 @@ switch ($_GET["op"]){
 	    echo json_encode($fetch);
 	break;
 
+	case 'selectRol':
+		require_once "../modelos/Perfiles.php";
+		$perfil = new Perfiles();
+
+		$rspta = $perfil->listar();
+
+		while ($reg = $rspta->fetch_object())
+				{
+					echo '<option value=' . $reg->idperfil . '>' . $reg->perfil . '</option>';
+				}
+
+				break;
+
+
 	case 'salir':
-		//Limpiamos las variables de sesión   
+		//Limpiamos las variables de sesión
         session_unset();
         //Destruìmos la sesión
         session_destroy();
